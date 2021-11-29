@@ -41,10 +41,10 @@ public class Main {
 	public static Driver getDriver(Order order) {
 		// Create empty Driver object
 		Driver driver = new Driver("", "", 0);
-		// Try and catch blocks in case drivers.txt is not found
+		// Try and catch blocks in case driver-info.txt is not found
 		try {
 			// New scanner on file drivers.txt
-			File input = new File("drivers.txt");
+			File input = new File("driver-info.txt");
 			Scanner sc = new Scanner(input);
 			
 			/* Initialise firstDriver boolean. Will store the first driver found in the file as the main Driver, which then allows 
