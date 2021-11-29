@@ -26,7 +26,7 @@ public class Main {
 		}
 		
 		// Initialise driver using getDriver function and pass Order1 as parameter
-		Driver driver = getDriver(Order1);
+		Driver allocatedDriver = getDriver(Order1);
 		
 		/* If city of order(restaurant) isn't equal to city of customer, call printErrorReceipt function, 
 		 * else call printReceipt function, and call Order1, Customer1, itemObjects and driver as parameters.*/
@@ -34,13 +34,13 @@ public class Main {
 			printErrorReceipt();
 		}
 		else {
-			printReceipt(Order1, Customer1, itemObjects, driver);
+			printReceipt(Order1, Customer1, itemObjects, allocatedDriver);
 		}
 	}
 
 	public static Driver getDriver(Order order) {
 		// Create empty Driver object
-		Driver driver = new Driver("", "", 0);
+		Driver returnDriver = new Driver("", "", 0);
 		// Try and catch blocks in case driver-info.txt is not found
 		try {
 			// New scanner on file drivers.txt
@@ -62,12 +62,12 @@ public class Main {
 				/* If Driver's city is equal to the order's city AND (current Driver's load is smaller than the stored driver OR
 				 * boolean firstDriver is true)*/
 				if (driverList[1].equalsIgnoreCase(order.city) && 
-					(Integer.parseInt(driverList[2]) < driver.load || firstDriver == true)) {
+					(Integer.parseInt(driverList[2]) < returnDriver.load || firstDriver == true)) {
 					
 					// Add current driver, make 'firstDriver' false
-					driver.name = driverList[0];
-					driver.city = driverList[1];
-					driver.load = Integer.parseInt(driverList[2]);
+					returnDriver.name = driverList[0];
+					returnDriver.city = driverList[1];
+					returnDriver.load = Integer.parseInt(driverList[2]);
 					firstDriver = false;
 				}
 			}
@@ -76,7 +76,7 @@ public class Main {
 		catch (FileNotFoundException e) {
 			System.out.println("Error");
 		}
-		return driver;
+		return returnDriver;
 	}
 	
 	public static void printReceipt(Order order, Customer customer, List<Item> itemList, Driver driver) {
